@@ -1,0 +1,10 @@
+{
+  "name": "programmers-palace-bot",
+  "version": "0.0.1",
+  "description": "A custom bot built for and maintained by the Programmers Palace Discord community, specially designed to meet the needs of a programming server with a maximal number of available customizations and optimized performance.",
+  "main": "app.js",
+  "repository": "https://github.com/ProgrammersPalace/bot",
+  "author": "Programmers Palace",
+  "license": "CC4",
+  "private": false
+}
