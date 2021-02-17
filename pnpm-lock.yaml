@@ -1,3 +1,6 @@
+dependencies:
+  discord.js: 12.5.1
+  dotenv: 8.2.0
 devDependencies:
   '@commitlint/cli': 11.0.0
   '@commitlint/config-angular': 11.0.0
@@ -474,6 +477,20 @@ packages:
       node: '>=v10.22.0'
     resolution:
       integrity: sha512-VoNqai1vR5anRF5Tuh/+SWDFk7xi7oMwHrHrbm1BprYXjB2RJsWLhUrStMssDxEl5lW/z3EUdg8RvH/IUBccSQ==
+  /@discordjs/collection/0.1.6:
+    dev: false
+    resolution:
+      integrity: sha512-utRNxnd9kSS2qhyivo9lMlt5qgAUasH2gb7BEOn6p0efFh24gjGomHzWKMAPn2hEReOPQZCJaRKoURwRotKucQ==
+  /@discordjs/form-data/3.0.1:
+    dependencies:
+      asynckit: 0.4.0
+      combined-stream: 1.0.8
+      mime-types: 2.1.28
+    dev: false
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-ZfFsbgEXW71Rw/6EtBdrP5VxBJy4dthyC0tpQKGKmYFImlmmrykO14Za+BiIVduwjte0jXEBlhSKf0MWbFp9Eg==
   /@eslint/eslintrc/0.3.0:
     dependencies:
       ajv: 6.12.6
@@ -956,6 +973,14 @@ packages:
     dev: true
     resolution:
       integrity: sha512-9IK9EadsbHo6jLWIpxpR6pL0sazTXV6+SQv25ZB+F7Bj9mJNaOc4nCRabwd5M/JwmUa8idz6Eci6eKfJryPs6Q==
+  /abort-controller/3.0.0:
+    dependencies:
+      event-target-shim: 5.0.1
+    dev: false
+    engines:
+      node: '>=6.5'
+    resolution:
+      integrity: sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==
   /acorn-globals/6.0.0:
     dependencies:
       acorn: 7.4.1
@@ -1135,7 +1160,6 @@ packages:
     resolution:
       integrity: sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ==
   /asynckit/0.4.0:
-    dev: true
     resolution:
       integrity: sha1-x57Zf380y48robyXkLzDZkdLS3k=
   /at-least-node/1.0.0:
@@ -1500,7 +1524,6 @@ packages:
   /combined-stream/1.0.8:
     dependencies:
       delayed-stream: 1.0.0
-    dev: true
     engines:
       node: '>= 0.8'
     resolution:
@@ -1739,7 +1762,6 @@ packages:
     resolution:
       integrity: sha512-jwK2UV4cnPpbcG7+VRARKTZPUWowwXA8bzH5NP6ud0oeAxyYPuGZUAC7hMugpCdz4BeSZl2Dl9k66CHJ/46ZYQ==
   /delayed-stream/1.0.0:
-    dev: true
     engines:
       node: '>=0.4.0'
     resolution:
@@ -1770,6 +1792,21 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==
+  /discord.js/12.5.1:
+    dependencies:
+      '@discordjs/collection': 0.1.6
+      '@discordjs/form-data': 3.0.1
+      abort-controller: 3.0.0
+      node-fetch: 2.6.1
+      prism-media: 1.2.6
+      setimmediate: 1.0.5
+      tweetnacl: 1.0.3
+      ws: 7.4.3
+    dev: false
+    engines:
+      node: '>=12.0.0'
+    resolution:
+      integrity: sha512-VwZkVaUAIOB9mKdca0I5MefPMTQJTNg0qdgi1huF3iwsFwJ0L5s/Y69AQe+iPmjuV6j9rtKoG0Ta0n9vgEIL6w==
   /doctrine/3.0.0:
     dependencies:
       esutils: 2.0.3
@@ -1794,6 +1831,12 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-QM8q3zDe58hqUqjraQOmzZ1LIH9SWQJTlEKCH4kJ2oQvLZk7RbQXvtDM2XEq3fwkV9CCvvH4LA0AV+ogFsBM2Q==
+  /dotenv/8.2.0:
+    dev: false
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
   /dynamic-dedupe/0.3.0:
     dependencies:
       xtend: 4.0.2
@@ -1997,6 +2040,12 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
+  /event-target-shim/5.0.1:
+    dev: false
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==
   /exec-sh/0.3.4:
     dev: true
     resolution:
@@ -3684,7 +3733,6 @@ packages:
     resolution:
       integrity: sha512-y7FpHSbMUMoyPbYUSzO6PaZ6FyRnQOpHuKwbo1G+Knck95XVU4QAiKdGEnj5wwoS7PlOgthX/09u5iFJ+aYf5Q==
   /mime-db/1.45.0:
-    dev: true
     engines:
       node: '>= 0.6'
     resolution:
@@ -3692,7 +3740,6 @@ packages:
   /mime-types/2.1.28:
     dependencies:
       mime-db: 1.45.0
-    dev: true
     engines:
       node: '>= 0.6'
     resolution:
@@ -3779,6 +3826,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
+  /node-fetch/2.6.1:
+    dev: false
+    engines:
+      node: 4.x || >=6.0.0
+    resolution:
+      integrity: sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
   /node-int64/0.4.0:
     dev: true
     resolution:
@@ -4152,6 +4205,24 @@ packages:
       node: '>= 10'
     resolution:
       integrity: sha512-7AeGuCYNGmycyQbCqd/3PWH4eOoX/OiCa0uphp57NVTeAGdJGaAliecxwBDHYQCIvrW7aDBZCYeNTP/WX69mkg==
+  /prism-media/1.2.6:
+    dev: false
+    peerDependencies:
+      '@discordjs/opus': ^0.4.0
+      ffmpeg-static: ^4.2.7 || ^3.0.0 || ^2.4.0
+      node-opus: ^0.3.3
+      opusscript: ^0.0.7
+    peerDependenciesMeta:
+      '@discordjs/opus':
+        optional: true
+      ffmpeg-static:
+        optional: true
+      node-opus:
+        optional: true
+      opusscript:
+        optional: true
+    resolution:
+      integrity: sha512-I1Ys8HA+9aSKQ2jbkO3r6p9Z+tMpSssGhucgxXvc0sSpOi0kK550rDQnKtAS7Z5TzPQeLJdBmK2Br8x+5137lg==
   /progress/2.0.3:
     dev: true
     engines:
@@ -4562,6 +4633,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-JxHc1weCN68wRY0fhCoXpyK55m/XPHafOmK4UWD7m2CI14GMcFypt4w/0+NV5f/ZMby2F6S2wwA7fgynh9gWSw==
+  /setimmediate/1.0.5:
+    dev: false
+    resolution:
+      integrity: sha1-KQy7Iy4waULX1+qbg3Mqt4VvgoU=
   /shebang-command/1.2.0:
     dependencies:
       shebang-regex: 1.0.0
@@ -5154,6 +5229,10 @@ packages:
     dev: true
     resolution:
       integrity: sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=
+  /tweetnacl/1.0.3:
+    dev: false
+    resolution:
+      integrity: sha512-6rt+RN7aOi1nGMyC4Xa5DdYiukl2UWCbcJft7YhxReBGQD7OAM8Pbxw6YMo4r2diNEA8FEmu32YOn9rhaiE5yw==
   /type-check/0.3.2:
     dependencies:
       prelude-ls: 1.1.2
@@ -5404,7 +5483,6 @@ packages:
     resolution:
       integrity: sha512-AvHcyZ5JnSfq3ioSyjrBkH9yW4m7Ayk8/9My/DD9onKeu/94fwrMocemO2QAJFAlnnDN+ZDS+ZjAR5ua1/PV/Q==
   /ws/7.4.3:
-    dev: true
     engines:
       node: '>=8.3.0'
     peerDependencies:
@@ -5497,6 +5575,8 @@ specifiers:
   '@types/node': ^14.14.28
   '@typescript-eslint/eslint-plugin': ^4.15.1
   '@typescript-eslint/parser': ^4.15.1
+  discord.js: ^12.5.1
+  dotenv: ^8.2.0
   eslint: ^7.20.0
   eslint-config-prettier: ^7.2.0
   husky: ^5.0.9
