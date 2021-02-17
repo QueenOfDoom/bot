@@ -7,11 +7,19 @@
   "author": "Programmers Palace",
   "license": "CC4",
   "private": false,
+  "scripts": {
+    "prettier:format": "prettier --write \"**/*.ts\""
+  },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-angular": "^11.0.0",
     "@types/node": "^14.14.28",
+    "@typescript-eslint/eslint-plugin": "^4.15.1",
+    "@typescript-eslint/parser": "^4.15.1",
+    "eslint": "^7.20.0",
+    "eslint-config-prettier": "^7.2.0",
     "husky": "^5.0.9",
+    "prettier": "^2.2.1",
     "typescript": "^4.1.5"
   },
   "husky": {
