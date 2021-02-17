@@ -1,0 +1,41 @@
+{
+    "extends": [
+        "@commitlint/config-angular"
+    ],
+    "rules": {
+        "body-max-line-length": [
+            1,
+            "always",
+            72
+        ],
+        "subject-case": [
+            1,
+            "always",
+            [
+                "camel-case",
+                "pascal-case",
+                "upper-case",
+                "lower-case"
+            ]
+        ],
+        "type-enum": [
+            2,
+            "always",
+            [
+                "ci",
+                "chore",
+                "docs",
+                "feat",
+                "fix",
+                "del",
+                "perf",
+                "refractor",
+                "undo",
+                "style",
+                "test",
+                "example",
+                "temp"
+            ]
+        ]
+    }
+}
