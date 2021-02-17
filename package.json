@@ -2,24 +2,32 @@
   "name": "programmers-palace-bot",
   "version": "0.0.1",
   "description": "A custom bot built for and maintained by the Programmers Palace Discord community, specially designed to meet the needs of a programming server with a maximal number of available customizations and optimized performance.",
-  "main": "app.js",
+  "main": "build/app.ts",
   "repository": "https://github.com/ProgrammersPalace/bot",
   "author": "Programmers Palace",
   "license": "CC4",
   "private": false,
   "scripts": {
-    "prettier:format": "prettier --write \"**/*.ts\""
+    "start:dev": "ts-node-dev -r tsconfig-paths/register --no-notify src/app.ts",
+    "prettier:format": "prettier --write \"**/*.ts\"",
+    "test": "jest --passWithNoTests"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-angular": "^11.0.0",
+    "@types/jest": "^26.0.20",
     "@types/node": "^14.14.28",
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
     "eslint": "^7.20.0",
     "eslint-config-prettier": "^7.2.0",
     "husky": "^5.0.9",
+    "jest": "^26.6.3",
     "prettier": "^2.2.1",
+    "ts-jest": "^26.5.1",
+    "ts-node": "^9.1.1",
+    "ts-node-dev": "^1.1.1",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^4.1.5"
   },
   "husky": {
