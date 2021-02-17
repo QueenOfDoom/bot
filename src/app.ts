@@ -1,9 +1,8 @@
 import * as dotenv from 'dotenv';
 import * as Discord from 'discord.js';
 import {handlers} from '@/event-handlers';
-import { ConfigService, discordClientOptions } from './services/config.service';
+import { config, discordClientOptions } from './services/config.service';
 
-const config = new ConfigService();
 const client = new Discord.Client(discordClientOptions);
 
 handlers.forEach(handler => {

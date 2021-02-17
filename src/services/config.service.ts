@@ -30,3 +30,5 @@ interface BotConfig {
     token: string;
     prefix: string;
 }
+
+export const config = new ConfigService();

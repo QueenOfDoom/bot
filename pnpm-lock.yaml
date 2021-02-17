@@ -2,6 +2,7 @@ dependencies:
   dayjs: 1.10.4
   discord.js: 12.5.1
   dotenv: 8.2.0
+  node-cache: 5.1.2
 devDependencies:
   '@commitlint/cli': 11.0.0
   '@commitlint/config-angular': 11.0.0
@@ -1480,6 +1481,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-t6wbgtoCXvAzst7QgXxJYqPt0usEfbgQdftEPbLL/cvv6HPE5VgvqCuAIDR0NgU52ds6rFwqrgakNLrHEjCbrQ==
+  /clone/2.1.2:
+    dev: false
+    engines:
+      node: '>=0.8'
+    resolution:
+      integrity: sha1-G39Ln1kfHo+DZwQBYANFoCiHQ18=
   /co/4.6.0:
     dev: true
     engines:
@@ -3831,6 +3838,14 @@ packages:
     dev: true
     resolution:
       integrity: sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
+  /node-cache/5.1.2:
+    dependencies:
+      clone: 2.1.2
+    dev: false
+    engines:
+      node: '>= 8.0.0'
+    resolution:
+      integrity: sha512-t1QzWwnk4sjLWaQAS8CHgOJ+RAfmHpxFWmc36IWTiWHQfs0w5JDMBS1b1ZxQteo0vVVuWJvIUKHDkkeK7vIGCg==
   /node-fetch/2.6.1:
     dev: false
     engines:
@@ -5587,6 +5602,7 @@ specifiers:
   eslint-config-prettier: ^7.2.0
   husky: ^5.0.9
   jest: ^26.6.3
+  node-cache: ^5.1.2
   prettier: ^2.2.1
   ts-jest: ^26.5.1
   ts-node: ^9.1.1
