@@ -1,7 +1,9 @@
 devDependencies:
   '@commitlint/cli': 11.0.0
   '@commitlint/config-angular': 11.0.0
+  '@types/node': 14.14.28
   husky: 5.0.9
+  typescript: 4.1.5
 lockfileVersion: 5.2
 packages:
   /@babel/code-frame/7.12.13:
@@ -191,6 +193,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-fZQQafSREFyuZcdWFAExYjBiCL7AUCdgsk80iO0q4yihYYdcIiH28CcuPTGFgLOCC8RlW49GSQxdHwZP+I7CNg==
+  /@types/node/14.14.28:
+    dev: true
+    resolution:
+      integrity: sha512-lg55ArB+ZiHHbBBttLpzD07akz0QPrZgUODNakeC09i62dnrywr9mFErHuaPlB6I7z+sEbK+IYmplahvplCj2g==
   /@types/normalize-package-data/2.4.0:
     dev: true
     resolution:
@@ -1027,6 +1033,13 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
+  /typescript/4.1.5:
+    dev: true
+    engines:
+      node: '>=4.2.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-6OSu9PTIzmn9TCDiovULTnET6BgXtDYL4Gg4szY+cGsc3JP1dQL8qvE8kShTRx1NIw4Q9IBHlwODjkjWEtMUyA==
   /universalify/2.0.0:
     dev: true
     engines:
@@ -1114,4 +1127,6 @@ packages:
 specifiers:
   '@commitlint/cli': ^11.0.0
   '@commitlint/config-angular': ^11.0.0
+  '@types/node': ^14.14.28
   husky: ^5.0.9
+  typescript: ^4.1.5
