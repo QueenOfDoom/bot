@@ -1,6 +1,8 @@
 import { Message } from "discord.js";
 import { IEventHandler } from "./event-handler.interface";
+import { ICommand } from '@/commands/command.interface';
 import {config} from '@/services/config.service';
+import {commands} from '@/commands';
 import { RateLimitService } from "@/services/rate-limit.service";
 
 export class MessageHandler implements IEventHandler<MessageHandler['EVENT_NAME']> {
@@ -17,7 +19,13 @@ export class MessageHandler implements IEventHandler<MessageHandler['EVENT_NAME'
 
         // TODO: add check for moderation commands -- should bypass rate limit
 
-        if (!this.commandRateLimiter.shouldReject(message.author))
+        if (this.commandRateLimiter.shouldReject(message.author))
             return void message.channel.send('You are sending too many messages!');
+        
+        // Command Found
+        if(commands[command] !== undefined) {
+            commands[command].run(message.client, message, args);
+        }
+
     }
 }
