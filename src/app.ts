@@ -10,3 +10,4 @@ handlers.forEach(handler => {
 });
 
 client.login(config.botConfig.token);
+
