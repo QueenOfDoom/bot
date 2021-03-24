@@ -23,9 +23,27 @@ export class MessageHandler implements IEventHandler<MessageHandler['EVENT_NAME'
             return void message.channel.send('You are sending too many messages!');
         
         // Command Found
-        if(commands[command] !== undefined) {
-            commands[command].run(message.client, message, args);
-        }
+        let fire: boolean = false;
+        commands.every(cmd => {
+            cmd.triggers.every(trigger => {
+                if(typeof trigger == "string") {
+                    fire = command === trigger;
+                } else if(trigger.constructor === RegExp) {
+                    fire = trigger.exec(command) !== null;
+                } else if(typeof trigger === "function") {
+                    fire = trigger(message, args);
+                } else {
+                    console.error(`Unknown Trigger! ${trigger}`);
+                }
+                return !fire;
+            });
 
+            if(fire) {
+                cmd.execute(message, args);
+                return false;
+            } else {
+                return true;
+            }
+        });
     }
 }
