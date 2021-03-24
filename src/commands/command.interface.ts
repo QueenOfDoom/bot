@@ -1,8 +1,11 @@
-import { Client } from 'discord.js';
+import { Client, Message } from 'discord.js';
+
+export type Trigger = (string | RegExp | ((message: Message, args: string[]) => boolean));
 
 export interface ICommand {
     name: string;
     description: string;
-    aliases?: string[];
-    run(client: Client, message: Message, args: string[]): Promise<void>;
+    validate: (message: Message, args: string[]) => boolean;
+    triggers: Trigger[];
+    execute: (message: Message, args: string[]) => void;
 }

@@ -10,5 +10,6 @@ const handlers: IEventHandler<keyof ClientEvents>[] = [
 
 export {
     handlers,
-    ReadyHandler
+    ReadyHandler,
+    MessageHandler
 }
