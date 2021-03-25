@@ -1,6 +1,17 @@
 import { ICommand } from './command.interface';
 import { PingCommand } from './ping.command';
+import { DefaultCommand } from '@/commands/default.command';
 
-const commands: ICommand[] = [new PingCommand()];
+const defaultCommand = new DefaultCommand();
 
-export { commands, PingCommand };
+const commands: ICommand[] = [
+    defaultCommand,
+    new PingCommand()
+];
+
+export {
+    commands,
+    defaultCommand,
+    PingCommand,
+    DefaultCommand
+}
