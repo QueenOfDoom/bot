@@ -1,19 +1,18 @@
 import { Message } from 'discord.js';
-import { ICommand, Trigger } from './command.interface';
+import { ConcreteTrigger, Command, TriggerCriteria } from './command';
 import { PermissionsLevel } from '@/services/permissions.service';
 
-export class PingCommand implements ICommand {
-    public name = 'ping';
-    public description = 'A simple debug command!';
-    public requiredPerms = PermissionsLevel.EVERYONE;
-    public validate = () => true;
+export class PingCommand extends Command {
+    name = 'ping';
+    description = 'A simple debug command!';
+    requiredPerms = PermissionsLevel.EVERYONE;
 
-    public triggers: Trigger[] = [
+    triggerCriteria: TriggerCriteria[] = [
         this.name
     ];
 
-    public execute(message: Message, command: string, args: string[]) {
+    validate = () => true;
+    public execute(message: Message, trigger: ConcreteTrigger, args: string[]) {
         message.channel.send('Pong!');
     }
-
 }
