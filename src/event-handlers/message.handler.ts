@@ -3,7 +3,8 @@ import { IEventHandler } from './event-handler.interface';
 import {config} from '@/services/config.service';
 import { commands, defaultCommand } from '@/commands';
 import { RateLimitService } from '@/services/rate-limit.service';
-import { ICommand, Trigger } from '@/commands/command.interface';
+import { ConcreteTrigger, Command, TriggerCriteria } from '@/commands/command';
+import { NullTrigger } from '@/commands/default.command';
 
 export class MessageHandler implements IEventHandler<MessageHandler['EVENT_NAME']> {
     public readonly EVENT_NAME = 'message';
@@ -14,23 +15,24 @@ export class MessageHandler implements IEventHandler<MessageHandler['EVENT_NAME'
         if (message.author.bot) return;
         if (message.content.indexOf(config.botConfig.prefix)) return;
 
-        const args = message.content.slice(config.botConfig.prefix.length).split(/ +/g);
-        const command: string = args.shift()?.toLowerCase() || 'default';
+        const args: string[] = message.content.slice(config.botConfig.prefix.length).split(/ +/g);
+        const keyword: string = args.shift()?.toLowerCase() || 'default';
 
         // TODO: add check for moderation commands -- should bypass rate limit
         if (this.commandRateLimiter.shouldReject(message.author))
             return void message.channel.send('You are sending too many messages!');
 
-        const toExecute: ICommand = commands.find((cmd: ICommand) => {
-            cmd.triggers.some((t: Trigger) => {
-                if (typeof t === 'function')
-                    return t(message, command, args);
-                if (t instanceof RegExp)
-                    return t.test(message.content);
-                return command === t;
-            });
-        }) || defaultCommand;
 
-        toExecute.execute(message, command, args);
+        const [command, trigger] = this.getTriggeredCommand(message, keyword, args) ?? [defaultCommand, NullTrigger];
+
+        command.execute(message, trigger, args);
+    }
+
+    private getTriggeredCommand(message: Message, keyword: string, args: string[]): [Command, ConcreteTrigger] | undefined{
+        for (const cmd of commands) {
+            const trigger = cmd.checkTriggers(message, keyword, args);
+            if (trigger)
+                return [cmd, trigger];
+        }
     }
 }

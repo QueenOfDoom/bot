@@ -1,17 +1,24 @@
 import { Message } from 'discord.js';
-import { ICommand, Trigger } from '@/commands/command.interface';
+import { ConcreteTrigger, Command, TriggerCriteria } from '@/commands/command';
 import { PermissionsLevel } from '@/services/permissions.service';
+import { defaultCommand } from '@/commands/index';
 
-export class DefaultCommand implements ICommand {
-    public name = 'default';
-    public description = 'The default "command" executed when no commands are matched.';
-    public requiredPerms = PermissionsLevel.EVERYONE;
-    public validate = () => true;
+export class DefaultCommand extends Command {
+    name = 'default';
+    description = 'The default "command" executed when no commands are matched.';
+    requiredPerms = PermissionsLevel.EVERYONE;
+    triggerCriteria: TriggerCriteria[] = [];
 
-    public triggers: Trigger[] = [];
-
-    public execute(message: Message, command: string, args: string[]): void {
+    validate = () => true;
+    execute(message: Message, trigger: ConcreteTrigger, args: string[]): void {
         return;
     }
 
+}
+
+export const NullTrigger: ConcreteTrigger = {
+    type: 'string',
+    command: defaultCommand,
+    criteria: 'null',
+    activations: []
 }
