@@ -1,5 +1,5 @@
 import { Message } from 'discord.js';
-import { ICommand, Trigger, ConcreteTrigger } from './command.interface';
+import { ICommand, Trigger } from './command.interface';
 import { PermissionsLevel } from '@/services/permissions.service';
 
 export class PingCommand implements ICommand {
