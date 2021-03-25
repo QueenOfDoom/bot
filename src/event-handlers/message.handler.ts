@@ -21,7 +21,7 @@ export class MessageHandler implements IEventHandler<MessageHandler['EVENT_NAME'
         if (this.commandRateLimiter.shouldReject(message.author))
             return void message.channel.send('You are sending too many messages!');
 
-        const toExecute: ICommand | undefined = commands.find((cmd: ICommand) => {
+        const toExecute: ICommand = commands.find((cmd: ICommand) => {
             cmd.triggers.some((t: Trigger) => {
                 if (typeof t === 'function')
                     return t(message, command, args);
@@ -29,9 +29,8 @@ export class MessageHandler implements IEventHandler<MessageHandler['EVENT_NAME'
                     return t.test(message.content);
                 return command === t;
             });
-        });
+        }) || defaultCommand;
 
-        if (toExecute) // TODO: refractor, add permissions check
-            toExecute.execute(message, command, args);
+        toExecute.execute(message, command, args);
     }
 }
