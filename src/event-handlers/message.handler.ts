@@ -20,7 +20,7 @@ export class MessageHandler implements IEventHandler<MessageHandler['EVENT_NAME'
 
         const [command, trigger] = this.getTriggeredCommand(message) ?? [defaultCommand, NullTrigger];
 
-        command.execute(message, trigger, trigger.args);
+        command.execute(message, trigger);
     }
 
     private getTriggeredCommand(message: Message): [Command, ConcreteTrigger] | undefined{
