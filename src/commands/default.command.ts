@@ -10,7 +10,7 @@ export class DefaultCommand extends Command {
     triggerCriteria: TriggerCriteria[] = [];
 
     validate = () => true;
-    execute(message: Message, trigger: ConcreteTrigger, args: string[]): void {
+    execute(message: Message, trigger: ConcreteTrigger): void {
         return;
     }
 
@@ -20,5 +20,6 @@ export const NullTrigger: ConcreteTrigger = {
     type: 'string',
     command: defaultCommand,
     criteria: 'null',
+    args: [],
     activations: []
 }
