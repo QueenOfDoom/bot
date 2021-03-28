@@ -6,10 +6,7 @@ import { PermissionsLevel } from '@/services/permissions.service';
 export class HelpCommand extends Command {
     name = 'help';
     description = 'The help command!';
-<<<<<<< HEAD
     syntax = '`help`';
-=======
->>>>>>> 33bcc58ed37e704377487a01930044bb8c74a89f
     requiredPerms = PermissionsLevel.EVERYONE;
     triggerCriteria: TriggerCriteria[] = [ this.name ];
     validate = () => true;
