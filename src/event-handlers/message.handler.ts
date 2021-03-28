@@ -19,10 +19,14 @@ export class MessageHandler implements IEventHandler<MessageHandler['EVENT_NAME'
 
         let args: string[] = message.content.split(/ +/g);
 
+<<<<<<< HEAD
         const [command, trigger] = this.getTriggeredCommand(message, args) ?? [defaultCommand, NullTrigger];
 
         if(command.validate(message, trigger, args))
             command.execute(message, trigger, args);
+=======
+        command.execute(message, trigger);
+>>>>>>> 33bcc58ed37e704377487a01930044bb8c74a89f
     }
 
     private getTriggeredCommand(message: Message, args: string[]): [Command, ConcreteTrigger] | undefined{
