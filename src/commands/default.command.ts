@@ -6,11 +6,12 @@ import { defaultCommand } from '@/commands/index';
 export class DefaultCommand extends Command {
     name = 'default';
     description = 'The default "command" executed when no commands are matched.';
+    syntax = ''; // No Syntax - since default behaviour
     requiredPerms = PermissionsLevel.EVERYONE;
     triggerCriteria: TriggerCriteria[] = [];
 
     validate = () => true;
-    execute(message: Message, trigger: ConcreteTrigger, args: string[]): void {
+    execute(_message: Message, _trigger: ConcreteTrigger): void {
         return;
     }
 
@@ -19,6 +20,7 @@ export class DefaultCommand extends Command {
 export const NullTrigger: ConcreteTrigger = {
     type: 'string',
     command: defaultCommand,
+    args: [],
     criteria: 'null',
     activations: []
 }

@@ -5,6 +5,7 @@ import { PermissionsLevel } from '@/services/permissions.service';
 export class PingCommand extends Command {
     name = 'ping';
     description = 'A simple debug command!';
+    syntax = '`ping`';
     requiredPerms = PermissionsLevel.EVERYONE;
 
     triggerCriteria: TriggerCriteria[] = [
@@ -12,7 +13,7 @@ export class PingCommand extends Command {
     ];
 
     validate = () => true;
-    public execute(message: Message, trigger: ConcreteTrigger) {
+    public execute(message: Message, _trigger: ConcreteTrigger) {
         message.channel.send('Pong!');
     }
 }
