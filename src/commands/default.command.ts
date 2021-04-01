@@ -1,4 +1,3 @@
-import { Message } from 'discord.js';
 import { ConcreteTrigger, Command, TriggerCriteria } from '@/commands/command';
 import { PermissionsLevel } from '@/services/permissions.service';
 import { defaultCommand } from '@/commands/index';
