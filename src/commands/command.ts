@@ -23,7 +23,7 @@ export abstract class Command {
         name: 'help',
         description: 'SubCommand: Help',
         syntax: '-',
-        triggerCriteria: [ 'help' ],
+        triggerCriteria: [ '--help' ],
         subCommands: [],
         requiredPerms: PermissionsLevel.USER,
         validate: (_message: Message, _trigger: ConcreteTrigger) => true,
@@ -35,19 +35,17 @@ export abstract class Command {
         checkTriggers: this.checkTriggers
     }];
 
-    abstract validate(message: Message, trigger: ConcreteTrigger): boolean;
-    abstract execute(message: Message, trigger: ConcreteTrigger): void;
+    abstract validate(message: Message, trigger: ConcreteTrigger, args: string[]): boolean;
+    abstract execute(message: Message, trigger: ConcreteTrigger, args: string[]): void;
 
-    checkTriggers(message: Message): ConcreteTrigger | null {
+    checkTriggers(message: Message, args: string[]): ConcreteTrigger | null {
         const trigger: Partial<ConcreteTrigger> = {
             command: this
         };
-        
-        trigger.args = message.content.split(/ +/g);
 
         for (const criteria of this.triggerCriteria) {
             if (typeof criteria === 'function') {
-                const res: string | null = criteria(message, trigger.args.shift()?.toLowerCase() || "", trigger.args);
+                const res: string | null = criteria(message, args.shift()?.toLowerCase() || "", args);
                 if (!res || res.length < 1) continue;
                 trigger.type = 'function';
                 trigger.activations = [{ text: res, index: -1 }];
@@ -63,19 +61,17 @@ export abstract class Command {
             }
             if (typeof criteria === 'string') {
                 if (message.content.indexOf(config.botConfig.prefix)) continue;
-                let keyword: string = trigger.args.shift()?.toLowerCase().slice(config.botConfig.prefix.length) || 'default';
+                let keyword: string = args.shift()?.toLowerCase().slice(config.botConfig.prefix.length) || 'default';
 
                 // Prepare Message for Subcommands
                 let subPos = keyword.lastIndexOf('>');
-                let currentKeyword = keyword.substring(subPos === -1 ? 0 : subPos+1);
-                console.log(`'${criteria}' vs '${currentKeyword}'`);
+                let currentKeyword = keyword.substring(subPos === -1 ? 0 : subPos);
                 if (criteria !== currentKeyword) continue;
-                message.content = config.botConfig.prefix + message.content.slice(
-                    config.botConfig.prefix.length + currentKeyword.length + 1);
-                    
+                
+                args[0] = "!" + args[0];    
                 // Subcommands
                 for (const scmd of this.subCommands) {
-                    const subTrig = scmd.checkTriggers(message);
+                    const subTrig = scmd.checkTriggers(message, args);
                     if(subTrig) {
                         keyword += `>${subTrig.command.name}`;
                         trigger.command = subTrig.command;

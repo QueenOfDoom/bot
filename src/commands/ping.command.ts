@@ -13,7 +13,7 @@ export class PingCommand extends Command {
     ];
 
     validate = () => true;
-    public execute(message: Message, _trigger: ConcreteTrigger) {
+    public execute(message: Message) {
         message.channel.send('Pong!');
     }
 }

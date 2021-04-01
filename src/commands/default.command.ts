@@ -11,7 +11,7 @@ export class DefaultCommand extends Command {
     triggerCriteria: TriggerCriteria[] = [];
 
     validate = () => true;
-    execute(_message: Message, _trigger: ConcreteTrigger): void {
+    execute(): void {
         return;
     }
 
