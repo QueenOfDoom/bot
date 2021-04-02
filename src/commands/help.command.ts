@@ -6,7 +6,10 @@ import { PermissionsLevel } from '@/services/permissions.service';
 export class HelpCommand extends Command {
     name = 'help';
     description = 'The help command!';
-    syntax = '`help`';
+    syntax = '`help [args]`\n' +
+    '**List of (Double Dash) Args:**\n' +
+    '`reload` - *Reloads the Help Message*\n' +
+    '`help` / `?` - *Shows this Message*';
     requiredPerms = PermissionsLevel.EVERYONE;
     triggerCriteria: TriggerCriteria[] = [ this.name ];
     validate = () => true;
@@ -14,6 +17,20 @@ export class HelpCommand extends Command {
 
     constructor() {
         super();
+        this.subCommands.push({
+            name: 'reload',
+            description: 'SubCommand: Reload',
+            syntax: '-',
+            triggerCriteria: [ '--reload' ],
+            subCommands: [],
+            requiredPerms: PermissionsLevel.USER,
+            validate: (message: Message, trigger: ConcreteTrigger) => true,
+            execute: (message: Message, trigger: ConcreteTrigger) => { 
+                this.reload();
+                message.channel.send('Help Message reloaded!');
+            },
+            checkTriggers: this.checkTriggers
+        });
         this.reload();
     }
 
@@ -52,22 +69,8 @@ export class HelpCommand extends Command {
 
     public execute(message: Message, trigger: ConcreteTrigger) {        
         if(trigger.type === 'string') {
-            // Default Command
-            if(trigger.args.length < 1) {
-                this.helpEmbed.setTimestamp();
-                message.channel.send(this.helpEmbed);
-            } else if(trigger.args[0] === 'reload') { // Reload Sub-Command
-                // Elevated User required? Maybe not
-                this.reload();
-                message.channel.send('Help Message reloaded!');
-            } else if(trigger.args[0] === '?' || trigger.args[0] === 'help') { // Help Sub-Command
-                message.channel.send("**Syntax (" + this.name + "):**\n" +
-                    "`help [args]`\n" +
-                    "**List of Args:**\n" +
-                    "`reload` - *Reloads the Help Message*\n" +
-                    "`help` / `?` - *Shows this Message*"
-                );
-            }
+            this.helpEmbed.setTimestamp();
+            message.channel.send(this.helpEmbed);
         }
     }
 }

@@ -26,8 +26,8 @@ export abstract class Command {
         triggerCriteria: [ '--help' ],
         subCommands: [],
         requiredPerms: PermissionsLevel.USER,
-        validate: (_message: Message, _trigger: ConcreteTrigger) => true,
-        execute: (message: Message, _trigger: ConcreteTrigger) => { 
+        validate: (message: Message, trigger: ConcreteTrigger) => true,
+        execute: (message: Message, trigger: ConcreteTrigger) => { 
             message.channel.send(`**Syntax (${this.name}):**\n` +
                 this.syntax
             );
@@ -60,15 +60,18 @@ export abstract class Command {
                 }));
             }
             if (typeof criteria === 'string') {
-                if (message.content.indexOf(config.botConfig.prefix)) continue;
+                if (message.content.indexOf(config.botConfig.prefix) !== 0) continue;
                 let keyword: string = args.shift()?.toLowerCase().slice(config.botConfig.prefix.length) || 'default';
 
                 // Prepare Message for Subcommands
                 let subPos = keyword.lastIndexOf('>');
                 let currentKeyword = keyword.substring(subPos === -1 ? 0 : subPos);
-                if (criteria !== currentKeyword) continue;
+                if (criteria !== currentKeyword) {
+                    args.unshift(config.botConfig.prefix + keyword);
+                    continue;
+                }
                 
-                args[0] = "!" + args[0];    
+                args[0] = config.botConfig.prefix + args[0];    
                 // Subcommands
                 for (const scmd of this.subCommands) {
                     const subTrig = scmd.checkTriggers(message, args);
