@@ -13,7 +13,11 @@ export class PingCommand extends Command {
     ];
 
     validate = () => true;
-    public execute(message: Message) {
-        message.channel.send('Pong!');
+    public execute(message: Message, trigger: ConcreteTrigger) {
+        if(trigger.activations[0].text === 'ping') {
+            message.channel.send('Pong!');
+        } else if(trigger.activations[0].text === 'sudo>ping') {
+            message.channel.send('Super Pong! (sudo demo)');
+        }
     }
 }
