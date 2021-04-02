@@ -1,5 +1,6 @@
 import { Message } from 'discord.js';
 import { IEventHandler } from './event-handler.interface';
+import { config } from '@/services/config.service';
 import { commands, defaultCommand } from '@/commands';
 import { RateLimitService } from '@/services/rate-limit.service';
 import { ConcreteTrigger, Command, TriggerCriteria } from '@/commands/command';
@@ -25,9 +26,9 @@ export class MessageHandler implements IEventHandler<MessageHandler['EVENT_NAME'
             command.execute(message, trigger, args);
     }
 
-    private getTriggeredCommand(message: Message, args: string[]): [Command, ConcreteTrigger] | undefined{
+    private getTriggeredCommand(message: Message): [Command, ConcreteTrigger] | undefined{
         for (const cmd of commands) {
-            const trigger = cmd.checkTriggers(message, args);
+            const trigger = cmd.checkTriggers(message);
             if (trigger)
                 return [trigger.command, trigger];
         }
