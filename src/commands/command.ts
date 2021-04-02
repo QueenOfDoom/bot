@@ -19,6 +19,7 @@ export abstract class Command {
     abstract triggerCriteria: TriggerCriteria[];
     requiredPerms: PermissionsLevel = PermissionsLevel.USER;
 
+
     subCommands: Command[] = [{
         name: 'help',
         description: 'SubCommand: Help',
@@ -42,10 +43,12 @@ export abstract class Command {
         const trigger: Partial<ConcreteTrigger> = {
             command: this
         };
+        
+        trigger.args = message.content.split(/ +/g);
 
         for (const criteria of this.triggerCriteria) {
             if (typeof criteria === 'function') {
-                const res: string | null = criteria(message, args.shift()?.toLowerCase() || "", args);
+                const res: string | null = criteria(message, trigger.args.shift()?.toLowerCase() || "", trigger.args);
                 if (!res || res.length < 1) continue;
                 trigger.type = 'function';
                 trigger.activations = [{ text: res, index: -1 }];
@@ -81,6 +84,7 @@ export abstract class Command {
                         break;
                     }
                 }
+
                 trigger.type = 'string';
                 trigger.activations = [{text: keyword, index: 0}];
             }
