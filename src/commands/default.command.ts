@@ -21,6 +21,5 @@ export const NullTrigger: ConcreteTrigger = {
     command: defaultCommand,
     args: [],
     criteria: 'null',
-    args: [],
     activations: []
 }

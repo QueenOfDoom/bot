@@ -65,4 +65,4 @@ For completeness sake I decided to include a small list of collaborators, to giv
 work for this epic project!  
 - [D. Kanter](https://github.com/dkantereivin) - the founder and lead dev of both - server and this project
 - [Wesam Jabali](https://github.com/wesamjabali) - a great software developer and founder and admin of another CompSci Discord Server
-- [Doomer](https://github.com/QueenOfDoom/) - the author of this README. :laughing:
+- [Doomer](https://github.com/QueenOfDoom/) - another contributor to the project

@@ -21,7 +21,6 @@ export class MessageHandler implements IEventHandler<MessageHandler['EVENT_NAME'
         let args: string[] = message.content.split(/ +/g);
 
         const [command, trigger] = this.getTriggeredCommand(message, args) ?? [defaultCommand, NullTrigger];
-
         if(command.validate(message, trigger, args))
             command.execute(message, trigger, args);
     }
