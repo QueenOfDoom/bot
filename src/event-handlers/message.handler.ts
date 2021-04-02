@@ -18,16 +18,19 @@ export class MessageHandler implements IEventHandler<MessageHandler['EVENT_NAME'
         if (this.commandRateLimiter.shouldReject(message.author))
             return void message.channel.send('You are sending too many messages!');
 
-        const [command, trigger] = this.getTriggeredCommand(message) ?? [defaultCommand, NullTrigger];
+        let args: string[] = message.content.split(/ +/g);
 
-        command.execute(message, trigger, trigger.args);
+        const [command, trigger] = this.getTriggeredCommand(message, args) ?? [defaultCommand, NullTrigger];
+
+        if(command.validate(message, trigger, args))
+            command.execute(message, trigger, args);
     }
 
     private getTriggeredCommand(message: Message): [Command, ConcreteTrigger] | undefined{
         for (const cmd of commands) {
             const trigger = cmd.checkTriggers(message);
             if (trigger)
-                return [cmd, trigger];
+                return [trigger.command, trigger];
         }
     }
 }

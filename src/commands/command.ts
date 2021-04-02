@@ -15,13 +15,31 @@ export interface ConcreteTrigger {
 export abstract class Command {
     abstract name: string;
     abstract description: string;
+    abstract syntax: string;
     abstract triggerCriteria: TriggerCriteria[];
     requiredPerms: PermissionsLevel = PermissionsLevel.USER;
 
-    abstract validate(message: Message, trigger: ConcreteTrigger): boolean;
-    abstract execute(message: Message, trigger: ConcreteTrigger): void;
 
-    checkTriggers(message: Message): ConcreteTrigger | null {
+    subCommands: Command[] = [{
+        name: 'help',
+        description: 'SubCommand: Help',
+        syntax: '-',
+        triggerCriteria: [ '--help' ],
+        subCommands: [],
+        requiredPerms: PermissionsLevel.USER,
+        validate: (_message: Message, _trigger: ConcreteTrigger) => true,
+        execute: (message: Message, _trigger: ConcreteTrigger) => { 
+            message.channel.send(`**Syntax (${this.name}):**\n` +
+                this.syntax
+            );
+        },
+        checkTriggers: this.checkTriggers
+    }];
+
+    abstract validate(message: Message, trigger: ConcreteTrigger, args: string[]): boolean;
+    abstract execute(message: Message, trigger: ConcreteTrigger, args: string[]): void;
+
+    checkTriggers(message: Message, args: string[]): ConcreteTrigger | null {
         const trigger: Partial<ConcreteTrigger> = {
             command: this
         };
@@ -46,9 +64,24 @@ export abstract class Command {
             }
             if (typeof criteria === 'string') {
                 if (message.content.indexOf(config.botConfig.prefix)) continue;
-                const keyword: string = trigger.args.shift()?.toLowerCase().slice(config.botConfig.prefix.length) || 'default';
+                let keyword: string = args.shift()?.toLowerCase().slice(config.botConfig.prefix.length) || 'default';
 
-                if (criteria !== keyword) continue;
+                // Prepare Message for Subcommands
+                let subPos = keyword.lastIndexOf('>');
+                let currentKeyword = keyword.substring(subPos === -1 ? 0 : subPos);
+                if (criteria !== currentKeyword) continue;
+                
+                args[0] = "!" + args[0];    
+                // Subcommands
+                for (const scmd of this.subCommands) {
+                    const subTrig = scmd.checkTriggers(message, args);
+                    if(subTrig) {
+                        keyword += `>${subTrig.command.name}`;
+                        trigger.command = subTrig.command;
+                        break;
+                    }
+                }
+
                 trigger.type = 'string';
                 trigger.activations = [{text: keyword, index: 0}];
             }

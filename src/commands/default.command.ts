@@ -1,4 +1,3 @@
-import { Message } from 'discord.js';
 import { ConcreteTrigger, Command, TriggerCriteria } from '@/commands/command';
 import { PermissionsLevel } from '@/services/permissions.service';
 import { defaultCommand } from '@/commands/index';
@@ -6,11 +5,12 @@ import { defaultCommand } from '@/commands/index';
 export class DefaultCommand extends Command {
     name = 'default';
     description = 'The default "command" executed when no commands are matched.';
+    syntax = ''; // No Syntax - since default behaviour
     requiredPerms = PermissionsLevel.EVERYONE;
     triggerCriteria: TriggerCriteria[] = [];
 
     validate = () => true;
-    execute(message: Message, trigger: ConcreteTrigger, args: string[]): void {
+    execute(): void {
         return;
     }
 
@@ -19,6 +19,8 @@ export class DefaultCommand extends Command {
 export const NullTrigger: ConcreteTrigger = {
     type: 'string',
     command: defaultCommand,
+    args: [],
     criteria: 'null',
+    args: [],
     activations: []
 }
