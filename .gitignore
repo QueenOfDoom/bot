@@ -1,4 +1,16 @@
+# Environment
 *.env
 *.env.*
+
+# Libraries
 node_modules/
+
+# IDEs
 .idea
+
+# Output
+**/*.aux
+**/*.log
+**/*.synctex.gz
+**/*.fls
+**/*.fdb_latexmk
